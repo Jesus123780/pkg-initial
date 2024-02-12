@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:storybook/recommended'],
+  extends: ['plugin:storybook/recommended', 'eslint-config-next-front/.eslintrc.js'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2022,

@@ -59,7 +59,8 @@ export const isPassword = (dato: string) => {
     return false
   }
   return true
-};
+}
+
 export const isCC = (dato: string) => {
   const validar = /^[0-9]{6,10}/g;
   if (validar.test(dato) === true) {

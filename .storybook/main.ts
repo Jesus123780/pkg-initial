@@ -9,8 +9,15 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
+    "@storybook/addon-jest",
     "storybook-css-modules"
   ],
+  viteFinal: (config) => {
+    config.optimizeDeps = config.optimizeDeps || {};
+    config.optimizeDeps.include = config.optimizeDeps.include || [];
+    config.optimizeDeps.include.push('next/link');
+    return config;
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {},

@@ -107,7 +107,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
   const disabledStyles = { color: "#CCC" }
   const CheckboxSvg = styled.div<{ checked: boolean }>`
-    animation: ${({ checked }) =>
+    animation: ${({ checked }: { checked: boolean }) =>
       checked &&
       css`
         ${zoomIn} 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
