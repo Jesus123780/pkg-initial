@@ -1,36 +1,41 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { keyframes } from 'styled-components';
 import {
   IconInformationProduct,
   IconMiniCheck,
-  IconTime
-} from '../../../assets'
-import { getGlobalStyle } from '../../../utils'
-import { Button, Row, Text } from '../../atoms'
-import style from './CardOrder.module.css'
-import { calculateRemainingTime, color } from './helpers'
+} from '../../../assets';
+import { getGlobalStyle } from '../../../utils';
+import { Button, Icon, Row, Text } from '../../atoms';
+import style from './CardOrder.module.css';
+import { calculateRemainingTime, color } from './helpers';
 
-export const CardOrder = ({
+interface CardOrderProps {
+  pCodeRef?: string;
+  view?: boolean;
+  pDatCre?: string;
+  deliveryTimeMinutes?: number | null;
+  handleViewOrder?: (pCodeRef: string) => string;
+}
+
+export const CardOrder: React.FC<CardOrderProps> = ({
   pCodeRef = '',
   view = true,
   pDatCre = '',
   deliveryTimeMinutes = null,
-  handleViewOrder = (pCodeRef) => {
-    return pCodeRef
-  }
+  handleViewOrder = (pCodeRef: string) => pCodeRef
 }) => {
-  const label = 'Nuevo Pedido'
+  const label = 'Nuevo Pedido';
   const { minutes, hour, remainingTimeText, entregaText, delay } =
     deliveryTimeMinutes
       ? calculateRemainingTime(pDatCre, deliveryTimeMinutes)
       : {
-        minutes: '',
-        hour: '',
-        remainingTimeText: '',
-        entregaText: '',
-        delay: false
-      }
+          minutes: '',
+          hour: '',
+          remainingTimeText: '',
+          entregaText: '',
+          delay: false
+        };
   return (
     <div
       className={style.card}
@@ -58,9 +63,7 @@ export const CardOrder = ({
         <div className={style.card_content_action}>
           <Text className={style.card_text_code}># {pCodeRef}</Text>
           <Button
-            onClick={() => {
-              return handleViewOrder(pCodeRef)
-            }}
+            onClick={() => handleViewOrder(pCodeRef)}
             primary={true}
           >
             Ver
@@ -80,7 +83,7 @@ export const CardOrder = ({
           )}
           {Boolean(!delay) && <Row alignItems='center'>
             <div style={{ width: '20px', marginRight: '20px' }}>
-              <IconTime size={25} />
+              <Icon size={25} icon='time' />
             </div>
             {Boolean(!delay) && (
               <Text className={style.card_text_content}>
@@ -92,7 +95,7 @@ export const CardOrder = ({
           </Row>}
           {Boolean(!delay) && <Row alignItems='center'>
             <div style={{ width: '20px', marginRight: '20px' }}>
-              <IconTime size={25} />
+              <Icon size={25} icon='time' />
             </div>
             {Boolean(!delay) && (
               <Text className={style.card_text_content}>{entregaText}</Text>
@@ -101,8 +104,20 @@ export const CardOrder = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+CardOrder.propTypes = {
+  pCodeRef: PropTypes.string,
+  pDatCre: PropTypes.string,
+  deliveryTimeMinutes: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf([null])
+  ]),
+  view: PropTypes.bool,
+  handleViewOrder: PropTypes.func
+};
+
 const pulse = keyframes`
   0% {
     transform: scale(1);
@@ -116,23 +131,24 @@ const pulse = keyframes`
     transform: scale(2.5);
     opacity: 0;
   }
-`
+`;
 
-export const Bubble = styled.div`
+interface BubbleProps {
+  color?: string;
+}
+
+export const Bubble = styled.div<BubbleProps>`
   display: block;
   position: relative;
   margin: 0;
+
   &:hover:after {
-    background-color: ${({ color }) => {
-    return color || ''
-  }};
+    background-color: ${({ color }) => color || ''};
   }
 
   &:after {
     content: "";
-    background-color: ${({ color }) => {
-    return color || ''
-  }};
+    background-color: ${({ color }) => color || ''};
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -147,9 +163,7 @@ export const Bubble = styled.div`
     display: block;
     text-align: center;
     opacity: 1;
-    background-color: ${({ color }) => {
-    return color || ''
-  }};
+    background-color: ${({ color }) => color || ''};
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -160,9 +174,7 @@ export const Bubble = styled.div`
     display: block;
     text-align: center;
     opacity: 1;
-    background-color: ${({ color }) => {
-    return color || ''
-  }};
+    background-color: ${({ color }) => color || ''};
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -174,23 +186,12 @@ export const Bubble = styled.div`
     display: block;
     text-align: center;
     opacity: 1;
-    background-color: ${({ color }) => {
-    return color || ''
-  }};
+    background-color: ${({ color }) => color || ''};
     width: 12px;
     height: 12px;
     border-radius: 50%;
     animation: ${pulse} 1.5s linear infinite;
   }
-`
+`;
 
-CardOrder.propTypes = {
-  pCodeRef: PropTypes.string,
-  pDatCre: PropTypes.string,
-  deliveryTimeMinutes: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf([null])
-  ]),
-  view: PropTypes.bool,
-  handleViewOrder: PropTypes.func
-}
+Bubble.displayName = 'Bubble';

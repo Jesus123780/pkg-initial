@@ -1,39 +1,40 @@
-import React from 'react'
-import { Tooltip } from './index'
 
-export default {
+import type { Meta, StoryObj } from '@storybook/react'
+import { Tooltip } from './index';
+
+const meta: Meta<typeof Tooltip> = {
+  component: Tooltip,
   title: 'atoms/Tooltip',
-  component: Tooltip
+  argTypes: {
+    backgroundColor: { control: 'color' }
+  },
+  args: {
+    text: 'Tooltip at the top',
+    position: ''
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Tooltip>;
+
+export const Primary: Story = {
+  args: {
+    text: 'Tooltip',
+    position: ''
+  },
 }
 
-const Template = (args) => {
-  return (
-    <Tooltip {...args}>
-      <button>Hover me</button>
-    </Tooltip>
-  )
+export const TopPosition: Story = {
+  args: {
+    text: 'Tooltip at the top',
+    position: 'top'
+  },
 }
 
-export const TopPosition = Template.bind({})
-TopPosition.args = {
-  text: 'Tooltip at the top',
-  position: 'top'
-}
-
-export const BottomPosition = Template.bind({})
-BottomPosition.args = {
-  text: 'Tooltip at the bottom',
-  position: 'bottom'
-}
-
-export const LeftPosition = Template.bind({})
-LeftPosition.args = {
-  text: 'Tooltip at the left',
-  position: 'left'
-}
-
-export const RightPosition = Template.bind({})
-RightPosition.args = {
-  text: 'Tooltip at the right',
-  position: 'right'
-}
+export const BottonPosition: Story = {
+  args: {
+    text: 'Tooltip at the bottom',
+    position: 'bottom'
+  },
+};

@@ -2,16 +2,20 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-export const FlipCard = ({
+interface FlipCardProps {
+  backChild?: React.ReactNode;
+  flipped?: boolean;
+  frontChild?: React.ReactNode;
+  onClick?: () => void;
+  setFlipped?: (boolean: boolean) => void;
+}
+
+export const FlipCard: React.FC<FlipCardProps> = ({
   backChild = null,
   flipped = false,
   frontChild = null,
-  onClick = () => {
-    return
-  },
-  setFlipped = (boolean) => {
-    return boolean
-  }
+  onClick = () => {},
+  setFlipped = (boolean) => { return boolean }
 }) => {
   return (
     <CardContainer

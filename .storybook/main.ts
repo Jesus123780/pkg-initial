@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite"
+import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
   stories: [
@@ -12,11 +13,10 @@ const config: StorybookConfig = {
     "@storybook/addon-jest",
     "storybook-css-modules"
   ],
-  viteFinal: (config) => {
-    config.optimizeDeps = config.optimizeDeps || {};
-    config.optimizeDeps.include = config.optimizeDeps.include || [];
-    config.optimizeDeps.include.push('next/link');
-    return config;
+  viteFinal: (config, { configType }) => {
+    return mergeConfig(config, {
+      define: { 'process.env': {} },
+    });
   },
   framework: {
     name: "@storybook/react-vite",

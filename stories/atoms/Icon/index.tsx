@@ -10,6 +10,7 @@ import {
   IconMainLogo,
   IconStrokeLogo,
 } from "../../assets/public/Icons";
+import { IconTime } from "../../../assets";
 
 interface IconMap {
   [key: string]: FC<IconProps>;
@@ -30,6 +31,7 @@ const Icons: IconMap = {
   IconLogoCMFBlue: IconLogoCMFBlue,
   IconClose: IconClose,
   logo: IconMainLogo,
+  time: IconTime,
   IconStrokeLogo: IconStrokeLogo,
 };
 

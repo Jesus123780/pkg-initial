@@ -1,15 +1,27 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './ContentQueryCard.module.css'
-import { IconStore, IconLogo, PColor } from '../../../assets'
+import { 
+  IconStore, 
+  IconLogo, 
+  PColor
+} from '../../../assets'
 
-export const ContentQueryCard = ({
+interface ContentQueryCardProps {
+  day?: string
+  delivery?: number
+  restaurant?: number
+  totalSales?: number
+  numberFormat?: (value: number) => string
+}
+
+export const ContentQueryCard: FC<ContentQueryCardProps> = ({
   day = 'hoy',
   delivery = 0,
   restaurant = 0,
   totalSales = 0,
-  numberFormat = () => {
-    return
+  numberFormat = (number) => {
+    return number
   }
 }) => {
   return (

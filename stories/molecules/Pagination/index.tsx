@@ -1,7 +1,16 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Pagination.module.css'
 
+interface PaginationProps {
+  currentPage: number;
+  isVisableButtonLeft: boolean;
+  isVisableButtonRight: boolean;
+  isVisableButtons: boolean;
+  items: Array<number | string>;
+  handleNextPage?: () => void;
+  handleOnClick: (number: number) => void;
+  handlePrevPage?: () => void;
+}
 /**
  * Pagination component
  *
@@ -16,9 +25,9 @@ import styles from './Pagination.module.css'
  * @param {Function} [props.handleNextPage] - Callback function when the next page button is clicked
  * @returns {JSX.Element} Pagination component
  */
-export const Pagination = ({
-  currentPage,
-  items,
+export const Pagination: React.FC<PaginationProps> = ({
+  currentPage = 0,
+  items = [],
   handleOnClick,
   isVisableButtonLeft,
   isVisableButtonRight,
@@ -53,17 +62,4 @@ export const Pagination = ({
       )}
     </div>
   )
-}
-
-Pagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ).isRequired,
-  handleOnClick: PropTypes.func.isRequired,
-  isVisableButtonLeft: PropTypes.bool.isRequired,
-  isVisableButtonRight: PropTypes.bool.isRequired,
-  isVisableButtons: PropTypes.bool.isRequired,
-  handlePrevPage: PropTypes.func,
-  handleNextPage: PropTypes.func
 }

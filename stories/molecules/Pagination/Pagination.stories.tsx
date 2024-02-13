@@ -9,10 +9,7 @@ export default {
       control: 'number',
       defaultValue: 1
     },
-    items: {
-      control: 'array',
-      defaultValue: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    },
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     isVisableButtonLeft: {
       control: 'boolean',
       defaultValue: false
@@ -25,13 +22,21 @@ export default {
       control: 'boolean',
       defaultValue: true
     }
+  },
+  args: {
+    currentPage: 1,
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+    isVisableButtonLeft: false,
+    isVisableButtonRight: false,
+    isVisableButtons: true
+  
   }
 }
 
-const Template = (args) => {
+const Template = (args: any) => {
   const [currentPage, setCurrentPage] = useState(1)
 
-  const handleOnClick = (page) => {
+  const handleOnClick = (page: any) => {
     setCurrentPage(page)
   }
 
@@ -50,6 +55,7 @@ const Template = (args) => {
       handleNextPage={handleNextPage}
       handleOnClick={handleOnClick}
       handlePrevPage={handlePrevPage}
+      items={args.items}
     />
   )
 }

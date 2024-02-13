@@ -8,8 +8,16 @@ export const color = {
   4: getGlobalStyle('--color-feedback-success-light'),
   5: getGlobalStyle('--color-primary-red')
 }
+export interface IColor {
+  0: string
+  1: string
+  2: string
+  3: string
+  4: string
+  5: string
+}
 
-export const calculateRemainingTime = (pDatCre, timeDelivery) => {
+export const calculateRemainingTime = (pDatCre: string, timeDelivery: number) => {
   const fechaCreacion = new Date(pDatCre)
   const fechaEntrega = new Date(fechaCreacion.getTime() + timeDelivery * 60000) // Convertir minutos a milisegundos
 

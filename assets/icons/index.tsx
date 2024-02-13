@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { IconProps } from '../../stories/assets/public/Icons'
 
 /**
  * IconBuys component
@@ -55,7 +56,7 @@ IconBuys.propTypes = {
  * @param {Object} props... - Any other SVG attributes
  * @returns {JSX.Element} SVG icon
  */
-export const IconTime = ({ style = {}, size, color, ...props }) => {return (
+export const IconTime = ({ style = {}, size, color, ...props }: IconProps) => {return (
   <svg
     fill='none'
     height={size || 800}

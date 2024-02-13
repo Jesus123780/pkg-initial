@@ -1,38 +1,39 @@
-import React from 'react'
-import { AlertInfo } from './index'
+import type { Meta, StoryObj } from '@storybook/react';
+import { AlertInfo } from './index';
 
-export default {
-  title: 'molecules/AlertInfo',
+const meta: Meta<typeof AlertInfo> = {
   component: AlertInfo,
+  title: 'molecules/AlertInfo',
   argTypes: {
-    backgroundColor: { control: 'color' }
-  }
-}
+    type: { control: 'select' },
+    message: { control: 'text' }
+  },
+  args: {
+    type: 'info',
+    message: 'This is an alert'
+  },
+};
 
-const Template = (args) => {
-  return <AlertInfo {...args} />
-}
+export default meta;
+type Story = StoryObj<typeof AlertInfo>;
 
-export const TemplateAlertInfo = Template.bind({})
+export const AlertInfoMain: Story = {
+  args: {
+    type: 'info',
+    message: 'This is an alert'
+  },
+};
 
-TemplateAlertInfo.args = {
-  message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac nisi'
-}
+export const AlertInfoWarning: Story = {
+  args: {
+    type: 'warning',
+    message: 'This is an alert warning'
+  },
+};
 
-export const Warning = Template.bind({})
-Warning.args = {
-  type: 'warning',
-  message: 'This is a warning message'
-}
-
-export const Error = Template.bind({})
-Error.args = {
-  type: 'error',
-  message: 'This is an error message'
-}
-
-export const Info = Template.bind({})
-Info.args = {
-  type: 'info',
-  message: 'This is an info message'
-}
+export const AlertInfoError: Story = {
+  args: {
+    type: 'error',
+    message: 'This is an alert error'
+  },
+};

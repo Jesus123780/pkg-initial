@@ -6,7 +6,7 @@ export default {
   component: Options
 }
 
-const Template = (args) => {
+const Template = (args: any) => {
   const [active, setActive] = useState(false)
 
   const toggleAccordion = () => {
