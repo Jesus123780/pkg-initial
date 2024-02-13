@@ -1,19 +1,17 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Button } from './index'
+import { Meta } from '@storybook/react'
+import { Button, ButtonProps } from './index'; // Ajusta la ruta según sea necesario
 
 export default {
   title: 'atoms/Button',
   component: Button,
-} as Meta;
+} as Meta<ButtonProps>;
 
-export const Primary: Story = () => <Button primary>Primary Button</Button>;
-Primary.args = {
-  primary: true,
-  type: 'secondary'
-}
-export const Secondary: Story = () => <Button>Secondary Button</Button>
-Secondary.args = {
-  primary: false,
-  type: 'secondary'
-}
+export const Primary: React.FC<ButtonProps> = ({ primary = true, type = 'primary', ...rest }) => (
+  <Button primary={primary} type={type} {...rest}>Primary Button</Button>
+);
+
+export const Secondary: React.FC<ButtonProps> = ({ primary = false, type = 'secondary', ...rest }) => (
+  <Button primary={primary} type={type} {...rest}>Secondary Button</Button>
+);
+

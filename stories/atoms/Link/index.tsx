@@ -1,8 +1,14 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import React from 'react'
+interface CustomLinkProps {
+  children: React.ReactNode;
+  href?: string;
+  otherProps?: any;
+}
 
-export const CustomLink = ({
+
+export const CustomLink : React.FC<CustomLinkProps> = ({
   children ,
   href = '/',
   otherProps

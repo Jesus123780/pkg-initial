@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { IconDelete, IconEdit } from '../..'
 import { PColor } from './../../../assets/colors/index'
 import { CardProductsContent, CtnBox, TooltipCardProduct, WrapperCard } from './styled'
+import { IconEdit, IconDelete } from '../../../assets'
 
 export const CardProductsComponent = ({
   isVisible,

@@ -4,8 +4,11 @@ import styled, { keyframes } from 'styled-components'
 import { PColor } from '../../../../assets/colors'
 import styles from './Loader.module.css'
 
+interface LoadingButtonProps {
+  color?: string;
+}
 
-export const LoadingButton = ({ color }) => {
+export const LoadingButton: React.FC<LoadingButtonProps> = ({ color }) => {
   return (
     <div className={styles.loader}>
       <div className={styles.spinner} style={{ backgroundColor: color }}></div>

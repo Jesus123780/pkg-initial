@@ -5,11 +5,18 @@ export default {
   title: 'atoms/Marquee',
   component: Marquee,
   argTypes: {
-    // Define your argTypes here (if any)
+  },
+  args: {
+    play: true,
+    direction: 'left',
+    delay: 0,
+    gradient: true,
+    gradientColor: [255, 255, 255],
+    gradientWidth: 200
   }
 }
 
-const Template = (args) => {return (
+const Template = (args: any) => {return (
   <Marquee {...args}>
     {/* Add your content here */}
     <div>This is some scrolling content.</div>
@@ -18,16 +25,3 @@ const Template = (args) => {return (
 )}
 
 export const Default = Template.bind({})
-Default.args = {
-  // Set your default arguments here
-  play: true,
-  pauseOnHover: false,
-  pauseOnClick: false,
-  direction: 'left',
-  speed: 20,
-  delay: 0,
-  loop: 0,
-  gradient: true,
-  gradientColor: [255, 255, 255],
-  gradientWidth: 200
-}

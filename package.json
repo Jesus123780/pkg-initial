@@ -13,7 +13,7 @@
     "file-saver": "2.0.5",
     "framer-motion": "11.0.3",
     "next": "12.3.0",
-    "react-chartjs-2": "5.2.0",
+    "react-chartjs-2": "^2.11.2",
     "react-qr-code": "2.0.12",
     "styled-components": "6.1.1",
     "swiper": "11.0.4",

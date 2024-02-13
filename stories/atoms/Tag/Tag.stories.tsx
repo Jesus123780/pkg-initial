@@ -1,21 +1,16 @@
-import React from 'react'
-import { Tag } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Tag } from './index';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'atoms/Tag',
+const meta: Meta<typeof Tag> = {
   component: Tag,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
-}
+  title: 'atoms/Tag',
+};
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => {return <Tag {...args} />}
+export default meta;
+type Story = StoryObj<typeof Tag>;
 
-export const TemplateTag = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-TemplateTag.args = {
-  label: 'Tag'
-}
+export const Primary: Story = {
+  args: {
+    label: 'OBLIGATORIO'
+  },
+};

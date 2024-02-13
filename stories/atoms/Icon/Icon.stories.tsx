@@ -1,21 +1,29 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { Icon } from './index'; // Asegúrate de tener la ruta correcta
+import type { Meta, StoryObj } from '@storybook/react';
+import { Icon } from './index';
 
-export default {
-  title: 'atoms/Icon',
-  component: Icon,
-} as Meta;
-
-const Template: Story<{ icon: string, size: number }> = (args) => <Icon {...args} />;
-
-export const IconoMiniCheck = Template.bind({});
-IconoMiniCheck.args = {
-  icon: 'MiniCheck', // Aquí puedes cambiar la clave para mostrar distintos íconos
+const meta: Meta<typeof Icon> = {
+    component: Icon,
+    title: "atoms/Icon",
+    args: {
+      icon: 'MiniCheck',
+      size: 24,
+    },
 };
 
-export const IconoLogoCMF = Template.bind({});
-IconoLogoCMF.args = {
-  icon: 'LogoCMF', // Clave para mostrar otro ícono
-  size: 100, // Cambia el tamaño
+export default meta;
+
+type Story = StoryObj<typeof Icon>;
+
+export const IconoMiniCheck: Story = {
+  args: {
+    icon: 'MiniCheck',
+    size: 24,
+  },
+};
+
+export const IconoLogoCMF: Story = {
+  args: {
+    icon: 'LogoCMF',
+    size: 100,
+  },
 };

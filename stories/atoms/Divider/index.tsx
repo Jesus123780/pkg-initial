@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Divider.module.css';
 
-interface DividerProps {
+export interface DividerProps {
   borderTop?: boolean;
   borderBottom?: boolean;
   margin?: number;

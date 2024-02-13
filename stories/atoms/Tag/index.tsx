@@ -1,17 +1,22 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import styles from './styles.module.css'
+import PropTypes from 'prop-types';
+import React from 'react';
+import styles from './styles.module.css';
 
-export const Tag = ({ label = 'OBLIGATORIO', children }) => {
+interface TagProps {
+  label?: string;
+  children?: React.ReactNode;
+}
+
+export const Tag: React.FC<TagProps> = ({ label = 'OBLIGATORIO', children }) => {
   return (
     <span className={styles['marmita-minitag']}>
       {label}
       {children}
     </span>
-  )
-}
+  );
+};
 
 Tag.propTypes = {
   children: PropTypes.any,
-  label: PropTypes.string
-}
+  label: PropTypes.string,
+};

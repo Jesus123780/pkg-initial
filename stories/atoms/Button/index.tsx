@@ -2,12 +2,12 @@ import React from 'react'
 import { classNames } from '../../../helpers'
 import style from './button.module.css'
 
-type ButtonProps = {
+export type ButtonProps = {
   width?: string;
   borderRadius?: string;
   fontSize?: string;
   padding?: string;
-  type?: string;
+  type?: string | 'secundary' | 'primary';
   primary?: boolean;
   disabled?: boolean;
   onClick?: () => void;

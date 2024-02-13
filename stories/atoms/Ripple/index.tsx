@@ -1,79 +1,97 @@
-import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
-import styled, { css } from 'styled-components'
-import { IconLoading } from '../../../assets'
-import { getGlobalStyle } from '../../../utils'
-import { BGColor, PColor } from '../../../assets/colors'
-import styles from './RippleButton.module.css'
+import PropTypes from 'prop-types';
+import React, { useRef, ReactNode, CSSProperties } from 'react';
+import styled, { css } from 'styled-components';
+import { IconLoading } from '../../../assets';
+import { getGlobalStyle } from '../../../utils';
+import { BGColor, PColor } from '../../../assets/colors';
+import styles from './RippleButton.module.css';
 
-export const RippleButton = props => {
+export interface RippleButtonProps {
+  label?: any;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  loading?: boolean;
+  style?: CSSProperties;
+  family?: string;
+  border?: string;
+  height?: string;
+  disabled?: boolean;
+  standard?: boolean;
+  active?: any;
+  type?: 'button' | 'submit' | 'reset';
+  widthButton?: string;
+  bgColor?: string;
+  color?: string;
+  margin?: string;
+  padding?: string;
+  radius?: string;
+  children?: ReactNode;
+}
+
+export const RippleButton: React.FC<RippleButtonProps> = (props) => {
   const {
-    label,
-    onClick,
-    loading,
-    style,
-    family,
-    disabled,
-    standard,
+    label = '',
+    onClick = () => {},
+    loading = false,
+    style = {},
+    family = 'PFont-Light',
+    disabled = false,
+    standard = false,
     active,
-    type,
-    widthButton
-  } = props || {
-    label: '',
-    onClick: () => { return },
-    loading: false,
-    style: {},
-    family: 'PFont-Light',
-    disabled: false,
-    standard: false,
-    active: false,
-    type: 'button',
-    widthButton: '100%'
-  }
-  const button = useRef(null)
-  const handleRippleEffect = (e) => {
-    const button = e?.currentTarget
+    type = 'button',
+    widthButton = '100%',
+    bgColor,
+    color,
+    margin,
+    padding,
+    radius,
+  } = props || {};
+  const button = useRef<HTMLButtonElement>(null);
 
-    const ripple = document.createElement('span')
-    const rect = button?.getBoundingClientRect()
-    const size = Math.max(rect.width, rect.height)
-    const left = e.pageX - rect.left - size / 2 - window.pageXOffset
-    const top = e.pageY - rect.top - size / 2 - window.pageYOffset
+  const handleRippleEffect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const buttonElement = button.current;
+    if (!buttonElement) return;
 
-    ripple.style.width = ripple.style.height = `${size}px`
-    ripple.style.left = `${left}px`
-    ripple.style.top = `${top}px`
-    ripple.classList.add(styles.ripple)
+    const ripple = document.createElement('span');
+    const rect = buttonElement.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const left = e.pageX - rect.left - size / 2 - window.pageXOffset;
+    const top = e.pageY - rect.top - size / 2 - window.pageYOffset;
 
-    const currentRipple = button.querySelector(`.${styles.ripple}`)
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${left}px`;
+    ripple.style.top = `${top}px`;
+    ripple.classList.add(styles.ripple);
+
+    const currentRipple = buttonElement.querySelector(`.${styles.ripple}`);
     if (currentRipple) {
-      currentRipple.remove()
+      currentRipple.remove();
     }
 
-    button.appendChild(ripple)
+    buttonElement.appendChild(ripple);
 
     ripple.addEventListener('animationend', function() {
-      ripple.remove()
-    })
+      ripple.remove();
+    });
 
     if (onClick) {
-      onClick(e)
+      onClick(e);
     }
-  }
+  };
 
-  if (!button) return <></>
+  if (!button) return <></>;
+
   return (
     <Button
       active={active}
-      bgColor={ props.bgColor}
+      bgColor={bgColor}
       className={`ripple-button`}
-      color={ props.color }
+      color={color}
       disabled={disabled}
       family={family}
-      margin={ props.margin }
+      margin={margin}
       onClick={handleRippleEffect}
-      padding={ props.padding }
-      radius={props.radius}
+      padding={padding}
+      radius={radius}
       ref={button}
       standard={standard}
       style={style}
@@ -82,17 +100,15 @@ export const RippleButton = props => {
       {...props}
     >
       <span id='ripple-button-label'>{label}</span>
-      {loading &&
+      {loading && (
         <LoadingWrapper>
           <IconLoading color={getGlobalStyle('--color-base-white')} size={20} />
         </LoadingWrapper>
-      }
-      <span style={loading ? { opacity: 0 } : {}} >
-        {props.children}
-      </span>
+      )}
+      <span style={loading ? { opacity: 0 } : {}}>{props.children}</span>
     </Button>
-  )
-}
+  );
+};
 
 RippleButton.propTypes = {
   active: PropTypes.any,
@@ -110,7 +126,8 @@ RippleButton.propTypes = {
   style: PropTypes.any,
   type: PropTypes.any,
   widthButton: PropTypes.any
-}
+};
+
 const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -120,29 +137,35 @@ const LoadingWrapper = styled.div`
   padding: 1em;
   bottom: 0;
   position: absolute;
+
   svg {
-  animation: rotator 1.4s linear infinite;
-  fill: #fff;
-}
+    animation: rotator 1.4s linear infinite;
+    fill: #fff;
+  }
 
-@keyframes rotator {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-`
+  @keyframes rotator {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
-const Button = styled.button`
-&:disabled {
-  background-color: ${`${PColor}69`} !important;
-}
+const Button = styled.button<RippleButtonProps>`
+  &:disabled {
+    background-color: ${`${PColor}69`} !important;
+  }
 
- padding: ${ ({ padding }) => {return padding || '1em'} };
- background-color: ${ ({ bgColor }) => {return bgColor || 'red'} };
- color: ${ ({ color }) => {return color || BGColor} };
- font-family: ${ ({ family }) => {return family || 'PFont-Light'} };
- width: ${ ({ widthButton }) => {return widthButton || '100%'} };
- ${ ({ margin }) => {return margin && css`margin: ${ margin };`} }
- ${ ({ border }) => {return border && css`border: ${ border };`}}
- ${ ({ radius }) => {return radius && css`border-radius: ${ radius };`}}
- ${ ({ height }) => {return height && css`height: ${ height };`}}
-`
+  padding: ${({ padding }) => padding || '1em'};
+  background-color: ${({ bgColor }) => bgColor || 'red'};
+  color: ${({ color }) => color || BGColor};
+  font-family: ${({ family }) => family || 'PFont-Light'};
+  width: ${({ widthButton }) => widthButton || '100%'};
+  ${({ margin }) => margin && css`margin: ${margin};`}
+  ${({ border }) => border && css`border: ${border};`}
+  ${({ radius }) => radius && css`border-radius: ${radius};`}
+  ${({ height }) => height && css`height: ${height};`}
+`;
+

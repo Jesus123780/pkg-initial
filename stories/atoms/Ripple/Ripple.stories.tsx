@@ -1,18 +1,20 @@
-import React from 'react'
-import {  RippleButton  } from './index'
-import { Meta } from '@storybook/react'
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react'; 
+import { RippleButtonProps, RippleButton } from './index';
 
-export default {
+const meta: Meta<RippleButtonProps> = {
+  component: RippleButton,
   title: 'atoms/RippleButton',
-  component: RippleButton
-} as Meta
+};
 
-const Template = (args) =>  <RippleButton {...args} ></RippleButton>
+export default meta;
 
-export const Example = Template.bind({})
+type Story = StoryObj<typeof RippleButton>;
+
+export const Example: Story = (args = {}) => <RippleButton {...args as RippleButtonProps} />
 Example.args = {
   label: 'Click Me',
   onClick: () => {
-    alert('Button clicked!')
-  }
-}
+    alert('Button clicked!');
+  },
+};

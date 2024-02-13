@@ -1,17 +1,20 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { PColor } from '../../../../assets/colors'
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { PColor } from '../../../../assets/colors';
 
-export const Loading = () => {
+interface LoadingProps {}
+
+const Loading: React.FC<LoadingProps> = () => {
   return (
     <Container>
       <span className='loader'></span>
     </Container>
-  )
-}
+  );
+};
 
+interface SpinnerProps {}
 
-export const SpinnerColor = () => {
+const SpinnerColor: React.FC<SpinnerProps> = () => {
   return (
     <Container>
       <LsRipple>
@@ -34,10 +37,10 @@ export const SpinnerColor = () => {
         </svg>
       </LsRipple>
     </Container>
-  )
-}
+  );
+};
 
-export const SpinnerColorJust = () => {
+const SpinnerColorJust: React.FC<SpinnerProps> = () => {
   return (
     <Container>
       <LsRipple>
@@ -60,8 +63,8 @@ export const SpinnerColorJust = () => {
         </svg>
       </LsRipple>
     </Container>
-  )
-}
+  );
+};
 
 const AnimationRipple = keyframes`
   0% {
@@ -78,63 +81,64 @@ const AnimationRipple = keyframes`
     height: 72px;
     opacity: 0;
   }
-`
-/// Estilos loading
-const Container = styled.div`
-    align-items: center;
-    background-color: #7777774e;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 9999999;
-    z-index: 99999999;
-    .loader {
-      animation: shadowPulse 1s linear infinite;
-      background: #FFF;
-      border-radius: 50%;
-      box-shadow: -24px 0 #FFF, 24px 0 #FFF;
-      box-sizing: border-box;
-      display: block;
-      height: 10px;
-      margin: 0px auto;
-      position: relative;
-      width: 10px;
-      z-index: 99999999;
-}
+`;
 
-@keyframes shadowPulse {
-  33% {
-    background: #FFF;
-    box-shadow: -24px 0 ${PColor}, 24px 0 #FFF;
-  }
-  66% {
-    background: ${PColor};
-    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
-  }
-  100% {
-    background: #FFF;
-    box-shadow: -24px 0 #FFF, 24px 0 ${PColor};
-  }
-}
-`
-const LsRipple = styled.div`
-    display: inline-block;
+const Container = styled.div`
+  align-items: center;
+  background-color: #7777774e;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999999;
+  .loader {
+    animation: shadowPulse 1s linear infinite;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: -24px 0 #fff, 24px 0 #fff;
+    box-sizing: border-box;
+    display: block;
+    height: 10px;
+    margin: 0 auto;
     position: relative;
-    width: 80px;
-    height: 80px;
-    & > div {
-        position: absolute;
-        border: 4px solid ${PColor};
-        opacity: 1;
-        border-radius: 50%;
-        animation: ${AnimationRipple} .1s cubic-bezier(0, 0.2, 0.8, 1)
-            infinite;
+    width: 10px;
+    z-index: 99999999;
+  }
+
+  @keyframes shadowPulse {
+    33% {
+      background: #fff;
+      box-shadow: -24px 0 ${PColor}, 24px 0 #fff;
     }
-    & div:nth-child(2) {
-        animation-delay: -0.5s;
+    66% {
+      background: ${PColor};
+      box-shadow: -24px 0 #fff, 24px 0 #fff;
     }
-`
+    100% {
+      background: #fff;
+      box-shadow: -24px 0 #fff, 24px 0 ${PColor};
+    }
+  }
+`;
+
+const LsRipple = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  & > div {
+    position: absolute;
+    border: 4px solid ${PColor};
+    opacity: 1;
+    border-radius: 50%;
+    animation: ${AnimationRipple} 0.1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  & div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+`;
+
+export { Loading, SpinnerColor, SpinnerColorJust }

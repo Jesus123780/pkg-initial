@@ -1,13 +1,43 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react';
+import PropTypes from 'prop-types';
 import {
   Bar,
   Doughnut,
   Line,
   Pie
-} from 'react-chartjs-2'
+} from 'react-chartjs-2';
 
+interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string[];
+    borderColor: string[];
+    borderWidth: number;
+  }[];
+}
 
-const dataTest = {
+interface ChartOptions {
+  indexAxis: string;
+  elements: {
+    bar: {
+      borderWidth: number;
+    };
+  };
+  responsive: boolean;
+  plugins: {
+    legend: {
+      position: string;
+    };
+    title: {
+      display: boolean;
+    };
+  };
+  type: string;
+}
+
+const dataTest: ChartData = {
   labels: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio'],
   datasets: [
     {
@@ -32,9 +62,9 @@ const dataTest = {
       borderWidth: 1
     }
   ]
-}
+};
 
-const optionsTest = {
+const optionsTest: ChartOptions = {
   indexAxis: 'y',
   elements: {
     bar: {
@@ -51,56 +81,80 @@ const optionsTest = {
     }
   },
   type: 'doughnut'
+};
 
+interface HorizontalBarChartProps {
+  data?: ChartData;
+  options?: ChartOptions;
 }
 
-export const HorizontalBarChart = ({ data, options }) => {return (
-  <div className='header'>
-    <div className='links'>
+export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({ data, options }) => {
+  return (
+    <div className='header'>
+      <div className='links'></div>
+      <Line data={data || dataTest} options={options || optionsTest} />
     </div>
-    <Line data={data || dataTest} options={options || optionsTest} />
-  </div>
-)}
+  );
+};
 
 HorizontalBarChart.propTypes = {
   data: PropTypes.any,
   options: PropTypes.any
+};
+
+interface CircleProps {
+  data?: ChartData;
+  options?: ChartOptions;
 }
 
-export const Circle = ({ data, options }) => {return (
-  <div className='header'>
-    <div className='links'>
+export const Circle: FC<CircleProps> = ({ data, options }) => {
+  return (
+    <div className='header'>
+      <div className='links'></div>
+      <Pie data={data || dataTest} options={options || optionsTest} />
     </div>
-    <Pie data={data || dataTest} options={options || optionsTest} />
-  </div>
-)}
+  );
+};
 
 Circle.propTypes = {
   data: PropTypes.any,
   options: PropTypes.any
+};
+
+interface DoughnutCharProps {
+  data?: ChartData;
+  options?: ChartOptions;
 }
 
-export const DoughnutChar = ({ data, options }) => {return (
-  <div className='header'>
-    <div className='links'>
+export const DoughnutChar: FC<DoughnutCharProps> = ({ data, options }) => {
+  return (
+    <div className='header'>
+      <div className='links'></div>
+      <Doughnut data={data || dataTest} options={options || optionsTest} />
     </div>
-    <Doughnut data={data || dataTest} options={options || optionsTest} />
-  </div>
-)}
+  );
+};
 
 DoughnutChar.propTypes = {
   data: PropTypes.any,
   options: PropTypes.any
+};
+
+interface BarChatProps {
+  data?: ChartData;
+  options?: ChartOptions;
 }
-export const BarChat = ({ data, options }) => {return (
-  <div className='header'>
-    <div className='links'>
+
+export const BarChat: FC<BarChatProps> = ({ data, options }) => {
+  return (
+    <div className='header'>
+      <div className='links'></div>
+      <Bar data={data || dataTest} options={options || optionsTest} />
     </div>
-    <Bar data={data || dataTest} options={options || optionsTest} />
-  </div>
-)}
+  );
+};
 
 BarChat.propTypes = {
   data: PropTypes.any,
   options: PropTypes.any
-}
+};
