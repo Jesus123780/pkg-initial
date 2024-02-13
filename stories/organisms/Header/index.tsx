@@ -92,7 +92,7 @@ export const Header = ({
         <HeaderWrapperButton onClick={() => { return setSalesOpen(!salesOpen) }} style={style}>
           <IconSales size={30} />
           <div className='info-sales'>
-            <span>Crear una venta</span>
+            <span>Crear una venta 1</span>
             {loadingCount ? <span>Cargando...</span> : <span>Total de ventas hoy  {count}</span>}
           </div>
         </HeaderWrapperButton>
