@@ -18,7 +18,10 @@
   },
   "description": "",
   "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
     "@babel/eslint-parser": "7.23.3",
+    "@babel/preset-env": "^7.23.9",
     "@storybook/addon-essentials": "^7.6.14",
     "@storybook/addon-interactions": "^7.6.14",
     "@storybook/addon-links": "^7.6.14",
@@ -43,9 +46,10 @@
   "keywords": [],
   "license": "ISC",
   "main": "index.tsx",
-  "name": "pkg-components",
+  "name": "pkg-components-hnl",
   "scripts": {
-    "build-storybook": "storybook build",
+    "build": "storybook build",
+    "build:components": "babel stories/** -d dist",
     "build:tokens": "node scripts/build-tokens.js",
     "check:eslint": "eslint '*/**/*.{js,jsx,tsx}' --fix --max-warnings=0 --no-error-on-unmatched-pattern",
     "check:te": "npm run check:types && npm run check:eslint",
@@ -55,5 +59,5 @@
     "sb": "storybook dev -p 6006",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.1.4"
+  "version": "1.1.5"
 }

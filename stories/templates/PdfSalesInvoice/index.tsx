@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import {
-  Document,
-  Page,
   Text,
   View,
   Image
