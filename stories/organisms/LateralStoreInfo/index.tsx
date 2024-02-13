@@ -1,42 +1,52 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { Rate } from '../../molecules'
-import { AsideInfoStore } from '../../molecules/AsideInfoStore'
-import { HeaderSteps } from '../../molecules/HeaderSteps'
-import { Text, Button, Row, Column } from '../../atoms'
-import { Divider } from '../../atoms/Divider'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Rate } from '../../molecules';
+import { AsideInfoStore } from '../../molecules/AsideInfoStore';
+import { HeaderSteps } from '../../molecules/HeaderSteps';
+import { Text, Button, Row, Column } from '../../atoms';
+import { Divider } from '../../atoms/Divider';
 
-export const LateralStoreInfo = ({
+interface Schedule {
+  day: string;
+  horarios: { horaInicio: string; horaFin: string }[];
+}
+
+interface LateralStoreInfoProps {
+  active?: number;
+  fState?: number;
+  idStore?: string;
+  minOrder?: number;
+  overActive?: number;
+  rating?: number;
+  show: boolean;
+  steps?: string[];
+  schedulesStore: Schedule[];
+  setRatingStar: (props: any) => void;
+  handleClose: () => void;
+  setActive: (active: number) => void;
+  setRating: (rating: number) => void;
+  handleOverActive: (index: number) => void;
+  removeFav: (idStore: string, fState: number) => void;
+  addFav: (idStore: string) => void;
+}
+
+export const LateralStoreInfo: React.FC<LateralStoreInfoProps> = ({
   active = 0,
   fState = 0,
   idStore = '',
-  minOrder = false,
+  minOrder,
   overActive = 0,
   rating = 0,
   show,
   steps = [],
   schedulesStore = [],
-  setRatingStar = (props) => {
-    return props
-  },
-  handleClose = () => {
-    return
-  },
-  setActive = (active) => {
-    return active
-  },
-  setRating = (active) => {
-    return active
-  },
-  handleOverActive = (index) => {
-    return index
-  },
-  removeFav = (props) => {
-    return props
-  },
-  addFav = (props) => {
-    return props
-  }
+  setRatingStar,
+  handleClose,
+  setActive,
+  setRating,
+  handleOverActive,
+  removeFav,
+  addFav,
 }) => {
   return (
     <AsideInfoStore handleClose={handleClose} show={show}>
@@ -51,43 +61,39 @@ export const LateralStoreInfo = ({
         {active === 0 && (
           <>
             <div style={{ width: '50%' }}>
-              <Text margin='0 0 20px 0'>Califica este restaurante</Text>
+              <Text>Califica este restaurante</Text>
               <div style={{ width: 'min-content' }}>
                 <Rate
                   onRating={(rate) => {
-                    setRating(rate)
+                    setRating(rate);
                     setRatingStar({
                       variables: {
                         data: {
-                          rScore: rate
-                        }
-                      }
-                    })
+                          rScore: rate,
+                        },
+                      },
+                    });
                   }}
                   rating={rating}
-                  size={30}
                 />
               </div>
             </div>
-            <Divider borderTop={true} margin='20px 0' />
+            <Divider borderTop={true} />
             <div
               className='containe'
               style={{ width: '50%', justifyContent: 'end' }}
             >
               {!!minOrder && (
-                <Text margin='0 0 20px 0' size='15px'>
+                <Text size='3xl'>
                   Precio de Producto mínimo $ {minOrder}
                 </Text>
               )}
-              <Text margin='0 0 20px 0'>
+              <Text>
                 {fState === 1 ? 'Elimina de' : 'Añade de '} tus favoritos
               </Text>
               <Button
-                isLiked={fState === 1}
                 onClick={() => {
-                  return fState === 1
-                    ? removeFav(idStore, fState)
-                    : addFav(idStore)
+                  return fState === 1 ? removeFav(idStore, fState) : addFav(idStore);
                 }}
               >
                 {fState === 1 ? 'Eliminar' : 'Añadir'}
@@ -100,45 +106,26 @@ export const LateralStoreInfo = ({
             return (
               <Column key={index}>
                 <Row>
-                  <Text margin='0 20px 20px 0'>{schedule.day}</Text>
-                  {schedule?.horarios?.map((horario, i) => {return (
+                  <Text>{schedule.day}</Text>
+                  {schedule?.horarios?.map((horario, i) => (
                     <div key={i}>
                       <Row>
-                        <Text margin='0 0 10px 0'>
+                        <Text>
                           {horario.horaInicio || 'Cerrado'}
                         </Text>
-                        <Text margin='0 0 10px 0'> - </Text>
-                        <Text margin='0 0 10px 0'>
+                        <Text> - </Text>
+                        <Text>
                           {horario.horaFin || 'Cerrado'}
                         </Text>
                       </Row>
                     </div>
-                  )})}
+                  ))}
                 </Row>
-                <Divider borderTop={true} margin='0 0 10px 0' />
+                <Divider borderTop={true} />
               </Column>
-            )
+            );
           })}
       </div>
     </AsideInfoStore>
-  )
-}
-
-LateralStoreInfo.propTypes = {
-  active: PropTypes.number,
-  addFav: PropTypes.func,
-  fState: PropTypes.number,
-  handleClose: PropTypes.func,
-  setRating: PropTypes.func,
-  setActive: PropTypes.func,
-  handleOverActive: PropTypes.func,
-  idStore: PropTypes.string,
-  minOrder: PropTypes.bool,
-  rating: PropTypes.number,
-  overActive: PropTypes.number,
-  removeFav: PropTypes.func,
-  setRatingStar: PropTypes.func,
-  show: PropTypes.bool,
-  steps: PropTypes.array,
-  schedulesStore: PropTypes.array
-}
+  );
+};

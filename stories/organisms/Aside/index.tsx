@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, {
   memo,
   useEffect,
@@ -49,7 +48,7 @@ const MemoAside = ({
     idStore: '',
     uState: 1
   },
-  loading,
+  loading = false,
   handleClick = (state) => { return state },
   handleOpenDeliveryTime = () => { return },
   setSalesOpen = (state) => { return state },
@@ -58,7 +57,6 @@ const MemoAside = ({
   const [show, setShow] = useState(false)
   const [active, setActive] = useState(null)
   const pathname = location?.pathname === '/dashboard/[...name]'
-
 
   const {
     storeName,
@@ -191,12 +189,12 @@ const MemoAside = ({
             </ButtonGlobalCreate>
             <Portal>
               <LeftNav show={show && !salesOpen}>
-                {location.pathname !== '/products' && <Info>
+                {location?.pathname !== '/products' && <Info>
                   <Button onClick={() => { return handleOpenCreateProduct() }}>
                       Productos
                   </Button>
                 </Info>}
-                {location.pathname === '/products' && <Info>
+                {location?.pathname === '/products' && <Info>
                   <Button
                     onClick={() => { 
                       setShowComponentModal(4)
@@ -288,21 +286,4 @@ const MemoAside = ({
   )
 }
 
-MemoAside.propTypes = {
-  collapsed: PropTypes.bool,
-  dataStore: PropTypes.object,
-  handleClick: PropTypes.func,
-  isMobile: PropTypes.any,
-  loading: PropTypes.bool,
-  countOrders: PropTypes.number,
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }),
-  salesOpen: PropTypes.any,
-  loadingDeliveryTime: PropTypes.bool,
-  setCollapsed: PropTypes.func,
-  handleOpenDeliveryTime: PropTypes.func,
-  setSalesOpen: PropTypes.func,
-  setShowComponentModal: PropTypes.func
-}
 export const Aside = memo(MemoAside)

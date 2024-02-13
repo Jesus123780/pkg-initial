@@ -1,10 +1,18 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { IconClose } from '../../../assets/icons'
 import { getGlobalStyle } from '../../../utils'
 import styles from './AsideInfoStore.module.css'
 
-export const AsideInfoStore = ({ show, children, handleClose = () => { return } }) => {
+interface AsideInfoStoreProps {
+  children: React.ReactNode;
+  handleClose: () => void;
+  show: boolean;
+}
+export const AsideInfoStore: React.FC<AsideInfoStoreProps> = ({ 
+  show = false, 
+  children, 
+  handleClose = () => { return } 
+}) => {
   return (
     <div
       className={`${styles.aside_content} ${
@@ -23,10 +31,4 @@ export const AsideInfoStore = ({ show, children, handleClose = () => { return } 
       {children}
     </div>
   )
-}
-
-AsideInfoStore.propTypes = {
-  children: PropTypes.node,
-  handleClose: PropTypes.func,
-  show: PropTypes.bool
 }
