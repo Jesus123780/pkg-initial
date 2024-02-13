@@ -1,4 +1,5 @@
 export * from './Inputs/Input'
+export * from './Inputs/index'
 export * from './Acordion'
 export * from './AlertBox'
 export * from './CardOrder'
